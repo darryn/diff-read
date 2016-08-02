@@ -194,7 +194,8 @@ $(document).ready(function() {
       
     });
     
-    $diffOutput.prepend('<div class="legend"><div class="grid"><div class="grid__item large--one-half legend--alpha">Add <span class="legend--item legend--add"></span></div><div class="grid__item large--one-half legend--omega"><span class="legend--item legend--remove"></span> Remove</div></div></div>');
+    $diffOutput.prepend('<hr><p><span class="cta cta--two">Step 2</span></p><h3 class="brand--two">Work through the following instructions, adding and removing code where defined.</h3><hr>');
+    $diffOutput.append("<hr><p><span class='cta'>Step 3</span></p><h3>You've finished... have a snack!</h3>");
     
   });
   

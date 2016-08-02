@@ -8,6 +8,11 @@ dl, dd, ol, ul, figure {
     padding: 0;
 }
 
+table {
+  border-spacing: 0;
+  width: 100%;
+}
+
 
 
 /**
@@ -88,12 +93,14 @@ textarea {
   background-color: #FAFBFA;
   border: none;
   box-sizing: border-box;
+  margin-bottom: 1em;
   min-height: 200px;
   padding: $spacing-unit;
   width: 100%;
   -webkit-box-shadow:inset 0 0 30px 0 rgba(0,0,0,0.15);
   box-shadow:inset 0 0 30px 0 rgba(0,0,0,0.15);
   -webkit-appearance: none;
+  @extend body;
   
   &:focus {
     outline: none;
@@ -114,10 +121,9 @@ hr {
   padding: $spacing-unit;
 }
 
-section {
-  margin-bottom: $spacing-unit;
+button {
+  cursor: pointer;
 }
-
 
 
 
@@ -200,6 +206,58 @@ input.cta {
 
 
 /**
+ * Diff Output
+ */
+#diff-output {
+  
+  .content--added {
+    background-color: transparentize($brand-color-one, 0.4);
+  }
+
+  .content--removed {
+    background-color: transparentize($brand-color-two, 0.4);
+  }
+
+  .code-block {
+    background: #fff; 
+    color: $text-color; 
+    margin-top: 20px; 
+    overflow-x: scroll; 
+    padding: 0; 
+    white-space: pre; 
+    -webkit-box-shadow:inset 0 0 20px 0 rgba(0,0,0,0.2);
+    box-shadow:inset 0 0 20px 0 rgba(0,0,0,0.2);
+  }
+
+  .code-block table {
+    margin: 0;
+  }
+
+  td[data-symbol],
+  td[data-number-a],
+  td[data-number-b] {
+    color: #555;
+    font-size: 80%;
+    padding: 0 0 0 10px;
+  }
+
+  td[data-symbol]:after {
+    content: attr(data-symbol);
+  }
+
+  td[data-number-a]:after {
+    content: attr(data-number-a);
+  }
+
+  td[data-number-b]:after {
+    content: attr(data-number-b);
+  }
+  
+}
+
+
+
+/**
  * Clearfix
  */
 %clearfix {
@@ -211,87 +269,3 @@ input.cta {
   }
 }
 
-
-
-#diff-output {
-  
-  h3 {
-    color: #333;
-    margin-top: 1.5em;
-  }
-  
-}
-
-.content--added {
-  background-color: #C2E6E2;
-}
-
-.content--removed {
-  background-color: #F8978F;
-}
-
-.code-block {
-  padding: 0; 
-  margin-top: 20px; 
-  background: #fff; 
-  color: #333; 
-  overflow-x: scroll; 
-  white-space: pre; 
-  box-shadow: #f45b4f 0 0 2px;
-}
-
-.code-block table {
-  margin: 0;
-}
-
-td[data-symbol],
-td[data-number-a],
-td[data-number-b] {
-  color: #999;
-  font-size: 80%;
-  padding: 0 0 0 10px;
-}
-
-td[data-symbol]:after {
-  content: attr(data-symbol);
-}
-
-td[data-number-a]:after {
-  content: attr(data-number-a);
-}
-
-td[data-number-b]:after {
-  content: attr(data-number-b);
-}
-
-.legend {
-  color: #333;
-  background-color: #FFEDCC;
-  border: 1px solid #F1DFBF;
-  padding: 1em;
-  margin-top: 2em;
-  
-  .legend--alpha {
-    text-align: right;
-  }
-  
-  .legend--omega {
-    text-align: left;
-  }
-  
-  .legend--item {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-  }
-  
-  .legend--add {
-    background-color: #C2E6E2;
-  }
-  
-  .legend--remove {
-    background-color: #F8978F;
-  }
-  
-}

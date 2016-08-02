@@ -42,6 +42,8 @@ $(document).ready(function() {
           var incNewIndex;
           var editedSection;
           var editedFile;
+          var indexBreak;
+          var indexBreakCount = 0;
 
 
           // Each line in block
@@ -87,6 +89,9 @@ $(document).ready(function() {
 
                         var indexRaw = val.replace('@@ ', '').replace(' @@', '');
                         var indexRawArray = indexRaw.split(' ');
+                        
+                        indexBreak = true;
+                        indexBreakCount = indexBreakCount + 1;
 
                         $.each(indexRawArray, function(i, lineIndexVal) {
 
@@ -129,7 +134,7 @@ $(document).ready(function() {
                         // Contains '-' or nothing
                         if (val.indexOf("+") !== 0) {
                           incOrigIndex = true;
-                          if (origIndex) {
+                          if (origIndex && indexBreak === false) {
                             origIndex = origIndex + 1;
                           } else {
                             origIndex = origIndexStart;
@@ -141,7 +146,7 @@ $(document).ready(function() {
                         // Contains '+' or nothing
                         if (val.indexOf("-") !== 0) {
                           incNewIndex = true;
-                          if (newIndex) {
+                          if (newIndex && indexBreak === false) {
                             newIndex = newIndex + 1;
                           } else {
                             newIndex = newIndexStart;
@@ -150,20 +155,30 @@ $(document).ready(function() {
                           incNewIndex = false;
                         }
                         
-                        if (incOrigIndex && incNewIndex) {
-                          diffBlockContent = diffBlockContent + '<tr class="' + contentEdited + '"><td data-number-a="' + origIndex + '"></td><td data-number-b="' + newIndex + '"></td><td data-symbol="' + contentEditedSymbol + '"></td><td>' + lineValue + '</td></tr>';
-                        }
-
-                        if (incOrigIndex && !incNewIndex) {
-                          diffBlockContent = diffBlockContent + '<tr class="' + contentEdited + '"><td data-number-a="' + origIndex + '"></td><td data-number-b=""></td><td data-symbol="' + contentEditedSymbol + '"></td><td>' + lineValue + '</td></tr>';
-                        }
-
-                        if (!incOrigIndex && incNewIndex) {
-                          if (newIndex === newIndexStart) {
-                            fileEditedMessage = 'Under the <strong>' + editedSection + '</strong> section create a new file called <strong>' + editedFile + '</strong> and paste the following code into it.'
+                        if (indexBreak && indexBreakCount > 1) {
+                        
+                          diffBlockContent = diffBlockContent + '<tr class="content--break"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'
+                          
+                        } else {
+                          
+                          if (incOrigIndex && incNewIndex) {
+                            diffBlockContent = diffBlockContent + '<tr class="' + contentEdited + '"><td data-number-a="' + origIndex + '"></td><td data-number-b="' + newIndex + '"></td><td data-symbol="' + contentEditedSymbol + '"></td><td>' + lineValue + '</td></tr>';
                           }
-                          diffBlockContent = diffBlockContent + '<tr class="' + contentEdited + '"><td data-number-a=""></td><td data-number-b="' + newIndex + '"></td><td data-symbol="' + contentEditedSymbol + '"></td><td>' + lineValue + '</td></tr>';
+
+                          if (incOrigIndex && !incNewIndex) {
+                            diffBlockContent = diffBlockContent + '<tr class="' + contentEdited + '"><td data-number-a="' + origIndex + '"></td><td data-number-b=""></td><td data-symbol="' + contentEditedSymbol + '"></td><td>' + lineValue + '</td></tr>';
+                          }
+
+                          if (!incOrigIndex && incNewIndex) {
+                            if (newIndex === newIndexStart) {
+                              fileEditedMessage = 'Under the <strong>' + editedSection + '</strong> section create a new file called <strong>' + editedFile + '</strong> and paste the following code into it.'
+                            }
+                            diffBlockContent = diffBlockContent + '<tr class="' + contentEdited + '"><td data-number-a=""></td><td data-number-b="' + newIndex + '"></td><td data-symbol="' + contentEditedSymbol + '"></td><td>' + lineValue + '</td></tr>';
+                          }
+                          
                         }
+                        
+                        indexBreak = false;
 
                       }
 

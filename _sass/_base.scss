@@ -217,11 +217,19 @@ input.cta {
   .content--removed {
     background-color: transparentize($brand-color-two, 0.4);
   }
+  
+  .content--break {
+    background-color: #eee;
+    
+    td {
+      line-height: 10px;
+    }
+  }
 
   .code-block {
     background: #fff; 
     color: $text-color; 
-    margin-top: 20px; 
+    margin: 2em 0; 
     overflow-x: scroll; 
     padding: 0; 
     white-space: pre; 

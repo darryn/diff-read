@@ -10,7 +10,7 @@ title: Diff Read
 email: darrynsoper@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Break down your Github .diff file into readable, step-by-step instructions of code alterations.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "https://darryn.github.io/diff-read" # the subpath of your site, e.g. /blog
 url: "https://darryn.github.io/diff-read" # the base hostname & protocol for your site
 github_username:  darryn
 

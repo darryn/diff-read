@@ -63,7 +63,7 @@ $(document).ready(function() {
 
                   if (fileEditedMessage === undefined) {
                     editedSection = val;
-                    fileEditedMessage = 'Under the <strong>' + editedSection + '</strong> section in the ';
+                    fileEditedMessage = 'Under the <strong>' + editedSection + '</strong> folder in the ';
                   } else {
                     editedFile = val;
                     fileEditedMessage = fileEditedMessage + '<strong>' + editedFile + '</strong> file, make the following edits:';
@@ -171,7 +171,7 @@ $(document).ready(function() {
 
                           if (!incOrigIndex && incNewIndex) {
                             if (newIndex === newIndexStart) {
-                              fileEditedMessage = 'Under the <strong>' + editedSection + '</strong> section create a new file called <strong>' + editedFile + '</strong> and paste the following code into it.'
+                              fileEditedMessage = 'Under the <strong>' + editedSection + '</strong> folder create a new file called <strong>' + editedFile + '</strong> and paste the following code into it.'
                             }
                             diffBlockContent = diffBlockContent + '<tr class="' + contentEdited + '"><td data-number-a=""></td><td data-number-b="' + newIndex + '"></td><td data-symbol="' + contentEditedSymbol + '"></td><td>' + lineValue + '</td></tr>';
                           }
